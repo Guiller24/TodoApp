@@ -15,19 +15,16 @@ class TaskController {
         }
     }
 
-    static async getTaskByDate(req, res) {
-        const { date } = req.params;
+    static async getTaskByUId(req, res){
+        const { user_id, date } = req.params;
         try{
-            console.log(`fetching data from ${data}`);
-            const tasks = await TaskService.getTasksByDate(date);
+            const tasks = await TaskService.getTasksByUId(user_id, date);
             if(!tasks){
                 return res.status(404).json({message: 'There are no Task for this date'});
             }
             res.status(200).json(tasks);
         }catch(err){
             console.error(err);
-            res.status(500).json({error: err.message});
-            throw err;
         }
     }
 

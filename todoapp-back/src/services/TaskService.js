@@ -11,9 +11,14 @@ class TaskService {
         }
     }
 
-    static async getTasksByDate(date){
+    static async getTasksByUId(user_id, date){
         try{
-            const tasks = await Tasks.findByPk(date);
+            const tasks = await Tasks.findAll({
+                where:{
+                    user_id: user_id,
+                    date: date,
+                }
+            });
             return tasks;
         }catch(err){
             console.error(err);

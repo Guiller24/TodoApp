@@ -1,4 +1,5 @@
 import http from './ApiConfig';
+import jwtDecode from 'jwt-decode';
 
 class Authenticate {
     static async authUser(email, password){
@@ -13,8 +14,11 @@ class Authenticate {
     }
 
     static getToken(){
-        return localStorage.getItem('token');
+        const token = localStorage.getItem('token');
+        const userInfo = token ? jwtDecode(token) : null;
+        return userInfo;
     }
+
 }
 
 export default Authenticate;
