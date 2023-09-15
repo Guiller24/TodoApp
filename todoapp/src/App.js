@@ -24,7 +24,7 @@ function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<GetStarted />} />
+        <Route path="/" element={<GetStarted isAuth={isAuth}/>} />
         <Route path="/login" element={<Login isAuth={isAuth} setIsAuth={setIsAuth}/>} />
         <Route path="/signup" element={<SignUp />} />
         <Route path='/main' element={<MainPage isAuth={isAuth}/>} />

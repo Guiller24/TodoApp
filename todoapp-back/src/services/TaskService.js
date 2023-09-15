@@ -1,5 +1,5 @@
 const Tasks = require('../models/tasks');
-
+const { Op } = require('sequelize');
 
 class TaskService {
     static async getAllTask(){
@@ -11,13 +11,28 @@ class TaskService {
         }
     }
 
-    static async getTasksByUId(user_id, date){
+    static async getTaskById(task_id){
+        console.log(task_id)
+        try{
+            const task = await Tasks.findByPk(task_id);
+            return task || null;
+        }catch(err){
+            console.error(err);
+        }
+    }
+
+    static async getTasksByUId(user_id, date = null){
+        const dates = new Date();
+        dates.setUTCHours(0, 0, 0, 0);
+        const today = dates.toISOString();
         try{
             const tasks = await Tasks.findAll({
-                where:{
+                where: {
                     user_id: user_id,
-                    date: date,
-                }
+                    due_date: {
+                        [Op.between]: [new Date(today), new Date(date)],
+                    },
+                },
             });
             return tasks;
         }catch(err){

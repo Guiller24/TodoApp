@@ -5,10 +5,14 @@ import StickyWall from '../components/StickyWall';
 import Today from '../components/Today';
 import Upcoming from '../components/Upcoming';
 import { useNav } from '../utils/Navigate';
+import FullTaskView from '../components/FullTaskView';
 
 const MainPage = ({ isAuth }) => {
   const [selectedComponent, setSelectedComponent] = useState('Today');
   const [showSideBar, setShowSideBar] = useState(true);
+  const [selectedTask, setSelectedTask] = useState('');
+  const [showTask, setShowTask] = useState(false);
+
   const { SignIn } = useNav();
 
   useEffect(() => {
@@ -23,7 +27,7 @@ const MainPage = ({ isAuth }) => {
       case 'Upcoming':
         return <Upcoming />;
       case 'Today':
-        return <Today />;
+        return <Today showTask={showTask} setShowTask={setShowTask} setSelectedTask={setSelectedTask} />;
       case 'Calendar':
         return <Calendar />;
       case 'StickyWall':
@@ -39,6 +43,7 @@ const MainPage = ({ isAuth }) => {
       <div className={`main-section ${showSideBar ? 'adjust' : ''}`}>
         {renderSelectedComponent()}
       </div>
+      <FullTaskView selectedTask={selectedTask} showTask={showTask} setShowTask={setShowTask} />
     </div>
   )
 }

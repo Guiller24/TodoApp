@@ -1,11 +1,19 @@
 import http from './ApiConfig';
 
 class TaskService {
-    static async getTaskByDate(date){
+    static async getTaskByUId(userId, date){
         try{
-            return (http.get('api/tasks'));
+            return http.get(`api/tasks/${userId}/${date}`);
         }catch(error){
             console.error(error);
+        }
+    }
+
+    static async getTaskById(taskId){
+        try{
+            return http.get(`api/tasks/${taskId}`);
+        }catch(err){
+            console.error(err);
         }
     }
 

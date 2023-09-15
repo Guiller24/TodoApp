@@ -2,11 +2,12 @@ import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useNav }  from '../utils/Navigate';
 
-const GetStarted = () => {
-  const { SignUp } = useNav();
+const GetStarted = ({ isAuth }) => {
+  const { SignUp, Main } = useNav();
 
   useEffect(() =>{
     document.title = 'Get Started';
+    if(isAuth){ Main() };
   });
   return (
     <div className='pages get-started'>
