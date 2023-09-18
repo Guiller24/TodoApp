@@ -9,6 +9,7 @@ const cors = require('cors');
 const UserRoutes = require('./routes/UserRoutes');
 const AuthRoute = require('./routes/AuthRoute');
 const TaskRoutes = require('./routes/TaskRoutes');
+const ListRoute = require('./routes/ListRoute');
 
 app.use(cors());
 
@@ -19,6 +20,7 @@ app.use(express.json());
 app.use('/api', UserRoutes);
 app.use('/api', AuthRoute);
 app.use('/api', TaskRoutes);
+app.use('/api', ListRoute);
 
 try{
     sequelize.sync();

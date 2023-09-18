@@ -20,6 +20,7 @@ const MainPage = ({ isAuth }) => {
     if(!isAuth){
       SignIn();
     }
+    
   });
 
   const renderSelectedComponent = () =>{

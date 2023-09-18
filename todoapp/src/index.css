@@ -444,9 +444,15 @@ main{
   display: flex;
   padding: 10px 15px;
   border: 0.5px solid var(--Light-gray);
-  width: 97%;
   align-items: center;
   border-radius: 5px;
+}
+.upcoming-input{
+  width: 95%;
+}
+
+.today-input{
+  width: 95%;
 }
 
 .task-inp{
@@ -508,13 +514,13 @@ input{
 }
 
 .task-view{
-  width: 500px;
-  height: 100vh;
+  width: 460px;
+  height: calc(100vh - 50px);
   position: absolute;
   transform: translateX(150%);
   top: 10px;
   right: 10px;
-  padding: 10px;
+  padding: 15px 30px;
   overflow: hidden;
   transition: transform 0.5s ease-in-out;
   background: var(--lighter-gray);
@@ -530,6 +536,82 @@ input{
   align-items: center;
   justify-content: space-between;
 }
-.task-head>h3{
-  margin-left: 13px;
+
+.task-title{
+  padding: 10px;
+  width: 95%;
+  border: solid 0.5px var(--Light-gray);
+  border-radius: 5px;
+}
+
+.task-description{
+  padding: 10px;
+  height: 100px;
+  border: solid 0.5px var(--Light-gray);
+  width: 95%;
+  border-radius: 5px;
+}
+
+.full-list-container{
+  display: flex;
+  align-items: center;
+  gap: 65px;
+}
+
+#list{
+  padding: 5px;
+  height: fit-content;
+  background: transparent;
+  outline: none;
+  border: solid 0.5px var(--Light-gray);
+  border-radius: 5px;
+}
+
+.due-date-container{
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}
+
+.due-date{
+  border: solid 0.5px var(--Light-gray);
+  border-radius: 5px;
+  padding: 5px;
+}
+
+.full-tags-container{
+  display: flex;
+  gap: 57px;
+  align-items: center;
+}
+.full-tags-container>button{
+  height: fit-content;
+  padding: 10px ;
+}
+
+.footer-list-container{
+  position: absolute;
+  display: flex;
+  justify-self: center;
+  bottom: 10px;
+  right: 10px;
+  gap: 20px;
+}
+
+.delete-task,
+.save-task{
+  padding: 15px 50px;
+  font-size: 20px;
+  font-weight: bold;
+  color: var(--icons);
+  border-radius: 10px;
+}
+
+.delete-task{
+  border: solid 0.5px var(--Light-gray);
+}
+
+.save-task{
+  background: var(--btn);
+  border: none;
 }

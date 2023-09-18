@@ -7,9 +7,7 @@ const Tasks = sequelize.define('Tasks', {
         primaryKey: true,
         autoIncrement: true,
     },
-    user_id:{
-        type:DataTypes.INTEGER,
-    },
+    user_id:{ type:DataTypes.INTEGER, },
     task: {type:DataTypes.STRING, allowNull:false},
     description: {type:DataTypes.STRING, allowNull:true},
     due_date: {type:DataTypes.DATE},

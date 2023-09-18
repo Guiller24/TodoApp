@@ -7,6 +7,7 @@ import { AiOutlineRight } from 'react-icons/ai';
 const Today = ({ showTask, setShowTask, setSelectedTask }) => {
   const [task, setTask] = useState('');
   const [taskList, setTaskList] = useState([]);
+  const [taskUpdated, setTaskUpdated] = useState(0);
   const description = '';
   const today = new Date();
   today.setUTCHours(23, 59, 59, 999);
@@ -27,6 +28,7 @@ const Today = ({ showTask, setShowTask, setSelectedTask }) => {
 
     try{
       const newTask = await TaskService.createTask(taskInfo);
+      setTaskUpdated(taskUpdated + 1);
     }catch(err){
       console.error(err);
     }
@@ -53,7 +55,7 @@ const Today = ({ showTask, setShowTask, setSelectedTask }) => {
   useEffect(() => {
     document.title = 'Task Master | Today';
     fetchTasks();
-  }, [task]);
+  }, [taskUpdated]);
 
 
   return (

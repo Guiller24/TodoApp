@@ -5,11 +5,24 @@ import { FaTasks, FaSignOutAlt, FaAngleDoubleRight, FaCalendarAlt, FaStickyNote,
 import { MdSettings } from 'react-icons/md'
 import AddList from './AddList';
 import AddTag from './AddTag';
+import Authenticate from '../api/AuthService';
+import ListService from '../api/ListService';
 
 const Sidebar = ({ setSelectedComponent, selectedComponent, setShowSideBar, showSideBar }) => {
   
   const [showAddList, setShowAddList] = useState(false);
   const [showAddTag, setShowAddTag] = useState(false);
+  const [lists, setLists] = useState([]);
+  const userId = Authenticate.getToken.user_id;
+
+  const fetchLists = async () => {
+    try{
+      const lists = await ListService.getListByUId(userId);
+      setLists(lists.data.reverse());
+    }catch(err){
+      console.error(err);
+    }
+  }
 
   const toggleSideBar = () => {
     setShowSideBar(!showSideBar);
@@ -51,6 +64,11 @@ const Sidebar = ({ setSelectedComponent, selectedComponent, setShowSideBar, show
         <hr />
         <div className='list'>
           <h4>List</h4>
+          {lists.map((list) => (
+            <div key={list.list_id}>
+              <p>{list.list}</p>
+            </div>
+          ))}
           <button className='add-list-btn' onClick={() => setShowAddList(!showAddList)}>
             <FaPlus />
             Add New List
