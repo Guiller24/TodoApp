@@ -1,24 +1,25 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { FaAngleDoubleRight, FaCalendarAlt, FaPlus, FaSignOutAlt, FaStickyNote, FaTasks } from 'react-icons/fa';
+import { MdSettings } from 'react-icons/md';
 import { RxCross2, RxHamburgerMenu } from 'react-icons/rx';
-import { Link } from 'react-router-dom';
-import { FaTasks, FaSignOutAlt, FaAngleDoubleRight, FaCalendarAlt, FaStickyNote, FaPlus } from 'react-icons/fa';
-import { MdSettings } from 'react-icons/md'
-import AddList from './AddList';
-import AddTag from './AddTag';
 import Authenticate from '../api/AuthService';
 import ListService from '../api/ListService';
+import AddList from './AddList';
+import AddTag from './AddTag';
 
-const Sidebar = ({ setSelectedComponent, selectedComponent, setShowSideBar, showSideBar }) => {
+const Sidebar = ({ setSelectedComponent, selectedComponent, setShowSideBar, showSideBar, count }) => {
   
   const [showAddList, setShowAddList] = useState(false);
   const [showAddTag, setShowAddTag] = useState(false);
   const [lists, setLists] = useState([]);
-  const userId = Authenticate.getToken.user_id;
+ console.log(lists);
+  const userId = Authenticate.getToken().user_id;
 
   const fetchLists = async () => {
     try{
-      const lists = await ListService.getListByUId(userId);
-      setLists(lists.data.reverse());
+      const listss = await ListService.getListByUId(userId);
+      console.log(listss)
+      setLists(listss.data.reverse());
     }catch(err){
       console.error(err);
     }
@@ -28,6 +29,10 @@ const Sidebar = ({ setSelectedComponent, selectedComponent, setShowSideBar, show
     setShowSideBar(!showSideBar);
   };
 
+  useEffect(() => {
+    fetchLists();
+  }, [count]);
+  
   return (
     <nav>
       <button onClick={toggleSideBar} className='menu-btn'>

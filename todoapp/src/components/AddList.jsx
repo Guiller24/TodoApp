@@ -4,6 +4,7 @@ import ListService from '../api/ListService';
 const AddList = ({ showAddList }) => {
   const [list, setList] = useState('');
   const userId = Authenticate.getToken().user_id;
+  const [count, setCount] = useState();
   const listInfo = {
     userId,
     list,
@@ -11,6 +12,7 @@ const AddList = ({ showAddList }) => {
   const addList = async () => {
     try{
       const newTask = await ListService.createList(listInfo);
+      setCount(count+1);
       setList('');
     }catch(err){
       console.error(err);

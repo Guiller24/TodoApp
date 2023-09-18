@@ -4,7 +4,7 @@ class ListController {
     static async getAllListByUid(req, res){
         const { user_id } = req.params
         try{
-           const lists = await ListService.getAllList(user_id);
+           const lists = await ListService.getAllListByUId(user_id);
            if(!lists){
                 res.status(404).json({error: "No lists found"})
            }
