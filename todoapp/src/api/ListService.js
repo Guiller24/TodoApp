@@ -18,6 +18,7 @@ class ListService {
     }
     static async createList(listInfo) {
         try {
+            console.log(listInfo)
             return http.post('api/lists/', listInfo);
         } catch (err) {
             console.error(err);

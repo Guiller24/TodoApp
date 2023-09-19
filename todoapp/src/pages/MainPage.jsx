@@ -7,7 +7,7 @@ import Upcoming from '../components/Upcoming';
 import { useNav } from '../utils/Navigate';
 import FullTaskView from '../components/FullTaskView';
 
-const MainPage = ({ isAuth }) => {
+const MainPage = ({ isAuth, setIsAuth }) => {
   const [selectedComponent, setSelectedComponent] = useState('Today');
   const [showSideBar, setShowSideBar] = useState(true);
   const [selectedTask, setSelectedTask] = useState('');
@@ -40,7 +40,7 @@ const MainPage = ({ isAuth }) => {
 
   return (
     <div className='main'>
-      <Sidebar setSelectedComponent={setSelectedComponent} selectedComponent={selectedComponent} setShowSideBar={setShowSideBar} showSideBar={showSideBar}/>
+      <Sidebar setSelectedComponent={setSelectedComponent} selectedComponent={selectedComponent} setShowSideBar={setShowSideBar} showSideBar={showSideBar} setIsAuth={setIsAuth}/>
       <div className={`main-section ${showSideBar ? 'adjust' : ''}`}>
         {renderSelectedComponent()}
       </div>

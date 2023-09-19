@@ -32,9 +32,10 @@ class ListController {
     }
 
     static async createList(req, res){
-        const { list_info } = req.body;
+        const list_info = req.body;
         try{
             const newList = await ListService.createList(list_info);
+            console.log(newList)
             res.json(newList);
         }catch(err){
             console.error(err);

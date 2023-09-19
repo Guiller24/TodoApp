@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { FaAngleDoubleRight, FaCalendarAlt, FaPlus, FaSignOutAlt, FaStickyNote, FaTasks } from 'react-icons/fa';
-import { MdSettings } from 'react-icons/md';
 import { RxCross2, RxHamburgerMenu } from 'react-icons/rx';
 import Authenticate from '../api/AuthService';
 import ListService from '../api/ListService';
 import AddList from './AddList';
 import AddTag from './AddTag';
+import { useNav} from '../utils/Navigate';
 
-const Sidebar = ({ setSelectedComponent, selectedComponent, setShowSideBar, showSideBar, count }) => {
-  
+const Sidebar = ({ setSelectedComponent, selectedComponent, setShowSideBar, showSideBar, count, setIsAuth }) => {
+  const { GetStarted } = useNav();
   const [showAddList, setShowAddList] = useState(false);
   const [showAddTag, setShowAddTag] = useState(false);
   const [lists, setLists] = useState([]);
@@ -24,7 +24,11 @@ const Sidebar = ({ setSelectedComponent, selectedComponent, setShowSideBar, show
       console.error(err);
     }
   }
-
+  const logout = () => {
+    localStorage.clear();
+    setIsAuth(false);
+    GetStarted();
+  }
   const toggleSideBar = () => {
     setShowSideBar(!showSideBar);
   };
@@ -78,7 +82,7 @@ const Sidebar = ({ setSelectedComponent, selectedComponent, setShowSideBar, show
             <FaPlus />
             Add New List
           </button>
-          <AddList showAddList={showAddList}/>
+          <AddList showAddList={showAddList} setShowAddList={setShowAddList}/>
           
         </div>
         <hr />
@@ -95,11 +99,7 @@ const Sidebar = ({ setSelectedComponent, selectedComponent, setShowSideBar, show
         <hr />
         
         <div className='footer'>
-          <button className='footer-btn'>
-            <MdSettings size={20} />
-            Settings
-          </button>
-          <button className='footer-btn'>
+          <button className='footer-btn' onClick={logout}>
             <FaSignOutAlt size={20}/>
             Sign out
           </button>

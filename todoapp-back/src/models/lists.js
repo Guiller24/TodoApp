@@ -7,8 +7,8 @@ const Lists = sequelize.define('Lists', {
         primaryKey: true,
         autoIncrement: true,
     },
-    user_id:{type:DataTypes.INTEGER},
-    list_name: {type:DataTypes.STRING},
+    user_id:{type:DataTypes.INTEGER, allowNull: false},
+    list_name: {type:DataTypes.STRING, allowNull: false},
     list_description:{type:DataTypes.STRING, allowNull: true,},
 },{
     timestamps: false,
